@@ -17,8 +17,9 @@
 
                     <li>
                         @Html.ActionLink(post.Title, "SinglePost", "Post",
+                      new { id = post.PostId })   @Html.ActionLink("Delete", "DeletePost", "Post",
                       new { id = post.PostId })
-                    </li>
+                    </li>  
 
 
 

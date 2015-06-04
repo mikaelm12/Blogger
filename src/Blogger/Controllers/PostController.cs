@@ -60,7 +60,28 @@ namespace Blogger.Controllers
             DbContext.Posts.Add(Post);
             DbContext.SaveChanges();
             return;
-           
+
+        }
+
+        public IActionResult DeletePost(int id)
+        {
+            Post post =(Post) DbContext.Posts.Single(p => p.PostId == id);
+            if (post != null)
+            {
+                DbContext.Posts.Remove(post);
+                DbContext.SaveChanges();
+            }
+            PostCollection allMyPosts = new PostCollection(DbContext.Posts
+               .Where(p => p.PosterEmail == Context.User.Identity.Name).ToArray());
+
+            return View("~/Views/Home/Profile", allMyPosts);
+        }
+
+
+        public IActionResult EditPost(int id)
+        {
+
+            return View();
         }
     }
 
