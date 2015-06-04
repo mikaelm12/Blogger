@@ -9,12 +9,15 @@ namespace Blogger.Models
     {
         public Post[] AllPosts { get; set; }
 
-       
+       public Dictionary<int, Post> postDictionary {get; set;}
+
 
 
         public PostCollection(Post[] posts)
         {
             this.AllPosts = posts;
+            for 
+            this.postDictionary.Add()
         }
     }
 }
