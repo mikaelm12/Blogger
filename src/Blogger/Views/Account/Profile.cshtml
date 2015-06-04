@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Profile";
+}
+
+<div style="float: left; width:200px"><h2>@ViewBag.Title</h2> </div>
+    <div style="float: right; width:200px; margin-top: 35px">
+        <form asp-controller="Home" asp-action="NewPost"><button type="submit">Write New Post</button></form>
+    </div>
+    <br /><br/><br/>
+    <div>
+        <center>
+            <ol>
+                <li><a href="www.cnn.com">Example Post </a></li>
+
+            </ol>
+
+        </center>
+    </div>
+
+
+    <center>
+        <a asp-controller="Manage" asp-action="Index" title="Manage">Manage Account</a>
+        <form asp-controller="Manage" asp-action="Index" title="Manage"><button type="submit">Manage Account</button></form>
+    </center>
+
+
+
+

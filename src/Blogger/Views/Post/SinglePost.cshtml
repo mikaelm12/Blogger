@@ -1,0 +1,19 @@
+﻿@model Blogger.Models.Post
+@{
+    ViewBag.Title = "Single Post";
+}
+
+
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+ 
+    <center>
+        <h3><strong>@Model.Title</strong></h3><br>
+        <p> Post Id @Model.PostId</p> <p>Poster Id @Model.PosterId</p>
+        <h4>@Model.Text</h4><br>
+        Posted by @Model.PosterEmail
+        at @Model.TimeStamp
+    </center>
+

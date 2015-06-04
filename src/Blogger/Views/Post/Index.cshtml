@@ -1,0 +1,17 @@
+﻿@model Blogger.Models.PostCollection
+@{
+    ViewBag.Title = "All Posts";
+}
+
+
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+@foreach (var post in Model.AllPosts.Reverse())
+{
+    <center><h3><strong>@post.Title</strong></h3><br>
+    <p> Post Id @post.PostId</p> <p>Poster Id @post.PosterId</p>
+            <h4>@post.Text</h4><br>
+                  Posted by @post.PosterEmail
+     at @post.TimeStamp</center>
+        }

@@ -1,0 +1,39 @@
+﻿@model Blogger.Models.PostCollection
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div style="float: left; width:200px"><h2>@ViewBag.Title</h2> </div>
+    <div style="float: right; width:200px; margin-top: 35px">
+        <form asp-controller="Home" asp-action="NewPost"><button type="submit">Write New Post</button></form>
+    </div>
+    <br /><br/><br/>
+    <div>
+        <center>
+            <ol>
+                @foreach (Post post in Model.AllPosts.Reverse())
+                {
+                  
+
+                    @Html.ActionLink(post.Title, "SinglePost", "Post",
+                      new { Title = post.Title, Text = post.Text, TimeStamp = post.TimeStamp,
+                            PostId = post.PostId, PosterEmail = post.PosterEmail, PosterId = post.PosterId}) <br />
+
+
+                   
+                }
+                
+
+            </ol>
+
+        </center>
+    </div>
+
+
+    <center>
+        <a asp-controller="Manage" asp-action="Index" title="Manage">Manage Account</a>
+    </center>
+
+
+
+

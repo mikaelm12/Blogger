@@ -1,0 +1,24 @@
+﻿@model Blogger.Models.Post 
+@{
+    ViewBag.Title = "Write New Post";
+}
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+
+<h3>@User.Identity.Name</h3>
+
+<form asp-controller="Post" asp-action="Index">
+    <center>
+        <div>
+            <p>Write your new post here</p>
+            <input name="Title" type="text"  value=" Title" /><br /><br />
+            <textarea name="Text" id="Post" rows="4" cols="50"></textarea>
+        </div>
+        <center>
+            <div>
+               <button type="submit">Post</button>
+            </div>
+        </center>
+    </center>
+</form>

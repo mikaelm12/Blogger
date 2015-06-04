@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "Blogger"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-Blogger-be05d64b-197a-4e54-9697-56a702a0563e;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}
