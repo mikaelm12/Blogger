@@ -13,14 +13,15 @@
             <ol>
                 @foreach (Post post in Model.AllPosts.Reverse())
                 {
-                  
-
-                    @Html.ActionLink(post.Title, "SinglePost", "Post",
-                      new { Title = post.Title, Text = post.Text, TimeStamp = post.TimeStamp,
-                            PostId = post.PostId, PosterEmail = post.PosterEmail, PosterId = post.PosterId}) <br />
 
 
-                   
+                    <li>
+                        @Html.ActionLink(post.Title, "SinglePost", "Post",
+                      new { id = post.PostId })
+                    </li>
+
+
+
                 }
                 
 

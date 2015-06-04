@@ -43,10 +43,12 @@ namespace Blogger.Controllers
 
         }
 
-        public IActionResult SinglePost(Post post)
-        {
 
-            return View(post);
+
+        public IActionResult SinglePost(int id)
+        {
+            Post singlePost =(Post) DbContext.Posts.Single(p => p.PostId == id);
+            return View(singlePost);
         }
 
 
