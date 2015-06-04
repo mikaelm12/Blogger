@@ -16,7 +16,10 @@ namespace Blogger.Controllers
 {
     [Authorize]
     public class AccountController : Controller
+
     {
+        [FromServices]
+        public ApplicationDbContext DbContext { get; set; }
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             UserManager = userManager;
@@ -52,7 +55,8 @@ namespace Blogger.Controllers
                 var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
                 if (result.Succeeded)
                 {
-                    return View("Profile");
+                    
+                    return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -102,7 +106,7 @@ namespace Blogger.Controllers
                     //await MessageServices.SendEmailAsync(model.Email, "Confirm your account",
                     //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     await SignInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Profile", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
