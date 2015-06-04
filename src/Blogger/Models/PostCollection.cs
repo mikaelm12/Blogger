@@ -16,8 +16,8 @@ namespace Blogger.Models
         public PostCollection(Post[] posts)
         {
             this.AllPosts = posts;
-            for 
-            this.postDictionary.Add()
+             
+           
         }
     }
 }
