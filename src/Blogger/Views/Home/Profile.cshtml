@@ -18,10 +18,14 @@
 
 
                     <li>
-                        @Html.ActionLink(post.Title, "SinglePost", "Post",
-                      new { id = post.PostId }) 
+                        @Html.ActionLink(post.Title, "SinglePost", "Post", new { id = post.PostId }) 
 
-                   
+                        @Html.ActionLink("", "DeletePost", "Post",new { id = post.PostId }, new { @class = "btn btn-default glyphicon glyphicon-trash" })
+
+
+
+
+
 
                        
 
