@@ -14,7 +14,8 @@ namespace Blogger.Controllers
         public ApplicationDbContext DbContext { get; set; }
         public IActionResult Index()
         {
-            return View();
+            PostCollection allPosts = new PostCollection(DbContext.Posts.ToArray());
+            return View(allPosts);
         }
 
         public IActionResult About()

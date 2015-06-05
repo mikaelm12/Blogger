@@ -1,19 +1,24 @@
 ﻿@model Blogger.Models.Post
-@{
-    ViewBag.Title = "Single Post";
-}
 
 
+<div>
 
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+    <h2>@ViewBag.Title</h2>
 
- 
-    <center>
-        <h3><strong>@Model.Title</strong></h3><br>
-        <p> Post Id @Model.PostId</p> <p>Poster Id @Model.PosterId</p>
+
+    @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.PosterEmail)
+    {
+        @Html.ActionLink("", "GetEditPostView", "Post", new { id = Model.PostId }, new { @class = "btn btn-default glyphicon glyphicon-wrench pull-right" })
+    }
+
+</div>
+ <br />
+        <center>
+            <h3><strong>@Model.Title</strong></h3><br>
+            <p> Post Id @Model.PostId</p> <p>Poster Id @Model.PosterId</p>
+       </center>
+        
         <h4>@Model.Text</h4><br>
-        Posted by @Model.PosterEmail
-        at @Model.TimeStamp
-    </center>
+        Posted by @Model.PosterEmail at @Model.TimeStamp
+   
 

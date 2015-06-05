@@ -1,4 +1,5 @@
 ﻿using Blogger.Models;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace Blogger.Controllers
             AddPost(newPost);
 
             PostCollection allPosts = new PostCollection(DbContext.Posts.ToArray());
-            return View(allPosts);
+            return View("~/Views/Home/Index", allPosts);
 
         
         }
@@ -38,18 +39,20 @@ namespace Blogger.Controllers
 
 
             PostCollection allPosts = new PostCollection(DbContext.Posts.ToArray());
-            return View(allPosts);
+            return View("~/Views/Home/Index",allPosts);
 
 
         }
 
 
-
+        
         public IActionResult SinglePost(int id)
         {
             Post singlePost =(Post) DbContext.Posts.Single(p => p.PostId == id);
             return View(singlePost);
         }
+
+
 
 
         public void AddPost(Post Post)
@@ -78,10 +81,26 @@ namespace Blogger.Controllers
         }
 
 
-        public IActionResult EditPost(int id)
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetEditPostView(int id)
         {
+            Post post = DbContext.Posts.Single(p => p.PostId ==id);
 
-            return View();
+            return View("EditPost" , post);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult UpdatePost(MinPost minPost) 
+        {
+            Post updatedPost = DbContext.Posts.Single(p => p.PostId == minPost.Id);
+            updatedPost.Text = minPost.Text;
+            updatedPost.Title = minPost.Title;
+            DbContext.SaveChanges();
+            return View("~/Views/Post/SinglePost", updatedPost);
+           // return View("~/Views/Post/SinglePost/" + minPost.Id);
         }
     }
 
