@@ -7,11 +7,10 @@
 <div class="pull-left"><h2>@ViewBag.Title</h2> </div>
 <br />
     <div class="pull-right ">
-        <form asp-controller="Home" asp-action="NewPost"><button type="submit">Write New Post</button></form>
+        <form asp-controller="Home" asp-action="NewPost"><button type="submit" class="btn btn-group-lg btn-primary" ><span class="glyphicon glyphicon-pencil"></span> </button></form>
   </div>
     <br /><br/><br/>
     <div>
-        
             <ol>
                 @foreach (Post post in Model.AllPosts.Reverse())
                 {
@@ -19,24 +18,13 @@
 
                     <li>
                         @Html.ActionLink(post.Title, "SinglePost", "Post", new { id = post.PostId }) 
+                        <a asp-action="SinglePost" asp-controller="Post"></a>
 
-                        @Html.ActionLink("", "DeletePost", "Post",new { id = post.PostId }, new { @class = "btn btn-default glyphicon glyphicon-trash" })
-
-
-
-
-
-
-                       
+                        @Html.ActionLink("", "DeletePost", "Post",new { id = post.PostId }, new { @class = "btn btn-default btn-danger glyphicon glyphicon-trash" })
 
                     </li>
-
-
-                   
-
                 }
-                
-
+  
             </ol>
 
         </>
