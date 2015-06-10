@@ -23,6 +23,10 @@ select{
 .post-button {
     margin-top: 10px
 }
+.form-submit {
+    padding-left: 15px;
+    padding-right:15px;
+}
 
     .carousel-caption p {
         font-size: 20px;

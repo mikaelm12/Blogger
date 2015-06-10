@@ -8,7 +8,7 @@
 
 
 <form asp-controller="Post" asp-action="UpdatePost">
-    <center>
+   
         <div>
             <strong><p>Edit your post</p></strong>
             <div class="form-group">
@@ -18,10 +18,10 @@
            <!--<input type="text" value="@Model.Title" /><br /><br /> --> 
             <textarea class=" form-control" name="Text" id="Post" rows="15" cols="100">@Model.Text</textarea>
         </div>
-        <center>
+       
             <div>
-                <button type="submit" class="btn btn-block post-button">Save</button>
+                <button type="submit" class="btn btn-success form-submit-smaller btn-lg post-button pull-right">Save</button><br /><br /><br />
             </div>
-        </center>
-    </center>
+        
+   
 </form>

@@ -8,7 +8,7 @@
 
     @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.PosterEmail)
     {
-        @Html.ActionLink("", "GetEditPostView", "Post", new { id = Model.PostId }, new { @class = "btn btn-primary primaryglyphicon glyphicon-wrench pull-right" })
+        @Html.ActionLink("", "GetEditPostView", "Post", new { id = Model.PostId }, new { @class = "btn btn-primary btn-lg glyphicon glyphicon-pencil pull-right" })
     }
 
 </div>

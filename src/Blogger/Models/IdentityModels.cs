@@ -26,6 +26,7 @@ namespace Blogger.Models
             {
                 //Database.EnsureDeleted();
                 //Database.AsRelational().ApplyMigrations();
+                Database.EnsureCreated();
                 _created = true;
             }
         }

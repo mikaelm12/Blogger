@@ -21,7 +21,15 @@ namespace Blogger.Controllers
         {
             var newPost = new Post();
             newPost.PosterEmail = Context.User.Identity.Name;
-            newPost.Title = postMin.Title;
+            if (postMin.Title == null)
+            {
+                newPost.Title = "No Title " + DateTime.Now.ToString();
+            }
+            else
+            {
+                newPost.Title = postMin.Title;
+            }
+            
             newPost.Text = postMin.Text;
             newPost.PostId = postMin.Id;
             newPost.TimeStamp =   DateTime.Now;
@@ -139,8 +147,17 @@ namespace Blogger.Controllers
                 Post updatedPost = DbContext.Posts.Single(p => p.PostId == minPost.Id);
                 if (Context.User.Identity.Name == updatedPost.PosterEmail)
                 {
+                    if (minPost.Title == null)
+                    {
+                        updatedPost.Title = updatedPost.TimeStamp.ToString();
+                    }
+                    else
+                    {
+                        updatedPost.Title = minPost.Title;
+                    }
+
                     updatedPost.Text = minPost.Text;
-                    updatedPost.Title = minPost.Title;
+                    
                     DbContext.SaveChanges();
                     return View("~/Views/Post/SinglePost", updatedPost);
                 }
