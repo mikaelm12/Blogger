@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Blogger.Controllers
 {
     public class PostController : Controller
@@ -86,8 +87,10 @@ namespace Blogger.Controllers
         }
 
         [Authorize]
+        [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int id)
         {
+            
             try
             {
                 Post post = (Post)DbContext.Posts.Single(p => p.PostId == id);
@@ -140,6 +143,7 @@ namespace Blogger.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdatePost(MinPost minPost) 
         {
             try
@@ -172,7 +176,13 @@ namespace Blogger.Controllers
 
 
         }
-       
+
+
+        [Authorize]
+        public IActionResult NewPost()
+        {
+            return View();
+        }
     }
 
 }

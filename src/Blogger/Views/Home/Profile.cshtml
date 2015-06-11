@@ -7,7 +7,7 @@
 <div class="pull-left"><h2>@ViewBag.Title</h2> </div>
 <br />
     <div class="pull-right ">
-        <form asp-controller="Home" asp-action="NewPost"><button type="submit" class="btn btn-group-lg btn-lg btn-primary" ><span class="glyphicon glyphicon-plus"></span> </button></form>
+        <form asp-controller="Post" asp-action="NewPost"><button type="submit" class="btn btn-group-lg btn-lg btn-primary" ><span class="glyphicon glyphicon-plus"></span> </button></form>
   </div>
     <br /><br/><br/>
     <div>
@@ -18,10 +18,15 @@
 
                     <li>
                         @Html.ActionLink(post.Title, "SinglePost", "Post", new { id = post.PostId }) 
-                        <a asp-action="SinglePost" asp-controller="Post"></a>
+                      
 
-                        @Html.ActionLink("", "DeletePost", "Post",new { id = post.PostId }, new { @class = "btn btn-default btn-danger glyphicon glyphicon-trash" })
 
+                        <form asp-controller="Post" asp-action="DeletePost">
+                            <button type="submit" class="btn btn-default btn-danger glyphicon glyphicon-trash"> </button>
+                            <input name="id" value="@post.PostId" hidden />
+                        </form>
+                     
+       
                     </li>
                 }
   

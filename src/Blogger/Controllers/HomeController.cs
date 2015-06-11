@@ -47,10 +47,6 @@ namespace Blogger.Controllers
             return View(allMyPosts);
         }
 
-        [Authorize]
-        public IActionResult NewPost()
-        {
-            return View();
-        }
+
     }
 }
