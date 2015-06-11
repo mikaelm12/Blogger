@@ -97,14 +97,18 @@ namespace Blogger
             if (env.IsEnvironment("Development"))
             {
                 //app.UseBrowserLink();
-                //app.UseErrorPage(ErrorPageOptions.ShowAll);
+              //  app.UseErrorPage(ErrorPageOptions.ShowAll);
+                //app.UseErrorHandler("/Home/Error");
+                app.UseStatusCodePagesWithReExecute("/Home/Error");
+
                 //app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
             }
             else
             {
                 // Add Error handling middleware which catches all application specific errors and
                 // sends the request to the following path or controller action.
-                app.UseErrorHandler("/Home/Error");
+                //app.UseErrorHandler("/Home/Error");
+                app.UseStatusCodePagesWithRedirects("/Home/Error");
             }
 
             // Add static files to the request pipeline.
@@ -131,7 +135,10 @@ namespace Blogger
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
-
+            app.Run(context => {
+                context.Response.StatusCode = 404;
+                return Task.FromResult(0);
+            });
 
         }
     }
