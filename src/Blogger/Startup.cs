@@ -97,7 +97,11 @@ namespace Blogger
             if (env.IsEnvironment("Development"))
             {
                 //app.UseBrowserLink();
+
                 //  app.UseErrorPage(ErrorPageOptions.ShowAll);
+
+              //  app.UseErrorPage(ErrorPageOptions.ShowAll);
+
                 //app.UseErrorHandler("/Home/Error");
                 app.UseStatusCodePagesWithReExecute("/Home/Error");
 
@@ -135,8 +139,10 @@ namespace Blogger
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
+
             app.Run(context =>
             {
+
                 context.Response.StatusCode = 404;
                 return Task.FromResult(0);
             });
