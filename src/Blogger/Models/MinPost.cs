@@ -9,8 +9,8 @@ namespace Blogger.Models
     {
         public int Id { get; set; }
 
-        public String Text { get; set; }
+        public string Text { get; set; }
 
-        public String Title { get; set; }
+        public string Title { get; set; }
     }
 }

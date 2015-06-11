@@ -18,19 +18,19 @@ namespace Blogger.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(MinPost postMin)
         {
             var newPost = new Post();
             newPost.PosterEmail = Context.User.Identity.Name;
             if (postMin.Title == null)
             {
-                newPost.Title = "No Title " + DateTime.Now.ToString();
+                newPost.Title =  DateTime.Now.ToString();
             }
             else
             {
                 newPost.Title = postMin.Title;
-            }
-            
+            }           
             newPost.Text = postMin.Text;
             newPost.PostId = postMin.Id;
             newPost.TimeStamp =   DateTime.Now;
@@ -60,7 +60,7 @@ namespace Blogger.Controllers
         {
             try
             {
-                var singlePost = (Post)DbContext.Posts.Single(p => p.PostId == id);
+                var singlePost = DbContext.Posts.Single(p => p.PostId == id);
                 return View(singlePost);
             }
             catch (Exception)
