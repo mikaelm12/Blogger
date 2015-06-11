@@ -8,9 +8,8 @@
                 <a asp-controller="Home" asp-action="Profile" title="Profile">Hello @User.GetUserName()!</a>
             </li>
             <li>
-                <a asp-controller="Post" asp-action="Index" title="Profile">View All Posts</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
     </form>
 }

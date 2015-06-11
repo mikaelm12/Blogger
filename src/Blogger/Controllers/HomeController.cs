@@ -14,7 +14,7 @@ namespace Blogger.Controllers
         public ApplicationDbContext DbContext { get; set; }
         public IActionResult Index()
         {
-            PostCollection allPosts = new PostCollection(DbContext.Posts.ToArray());
+            var allPosts = new PostCollection(DbContext.Posts.ToArray());
             return View(allPosts);
         }
 
@@ -41,7 +41,7 @@ namespace Blogger.Controllers
         public IActionResult Profile()
         {
 
-            PostCollection allMyPosts = new PostCollection(DbContext.Posts
+            var allMyPosts = new PostCollection(DbContext.Posts
                 .Where(p => p.PosterEmail == Context.User.Identity.Name).ToArray());
            
             return View(allMyPosts);

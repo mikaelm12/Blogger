@@ -38,7 +38,7 @@ namespace Blogger.Controllers
 
             AddPost(newPost);
 
-            PostCollection allPosts = new PostCollection(DbContext.Posts.ToArray());
+            var allPosts = new PostCollection(DbContext.Posts.ToArray());
             return View("~/Views/Home/Index", allPosts);
 
         
@@ -48,7 +48,7 @@ namespace Blogger.Controllers
         {
 
 
-            PostCollection allPosts = new PostCollection(DbContext.Posts.ToArray());
+            var allPosts = new PostCollection(DbContext.Posts.ToArray());
             return View("~/Views/Home/Index",allPosts);
 
 
@@ -60,7 +60,7 @@ namespace Blogger.Controllers
         {
             try
             {
-                Post singlePost = (Post)DbContext.Posts.Single(p => p.PostId == id);
+                var singlePost = (Post)DbContext.Posts.Single(p => p.PostId == id);
                 return View(singlePost);
             }
             catch (Exception)
@@ -77,8 +77,6 @@ namespace Blogger.Controllers
         [Authorize]
         public void AddPost(Post Post)
         {
-
-
 
             DbContext.Posts.Add(Post);
             DbContext.SaveChanges();
@@ -101,7 +99,7 @@ namespace Blogger.Controllers
                     {
                         DbContext.Posts.Remove(post);
                         DbContext.SaveChanges();
-                        PostCollection allMyPosts = new PostCollection(DbContext.Posts
+                        var allMyPosts = new PostCollection(DbContext.Posts
                             .Where(p => p.PosterEmail == Context.User.Identity.Name).ToArray());
 
                         return View("~/Views/Home/Profile", allMyPosts);
@@ -127,17 +125,19 @@ namespace Blogger.Controllers
         {
             try
             {
-                Post post = DbContext.Posts.Single(p => p.PostId == id);
-                return View("EditPost", post);
+                var post = DbContext.Posts.Single(p => p.PostId == id);
+                if (post.PosterEmail == Context.User.Identity.Name) { 
+                    return View("EditPost", post);
+                }
             }
             catch (Exception)
             {
 
                 return View("~/Views/Shared/Error.cshtml");
             }
-            
 
-           
+            return View("~/Views/Shared/Error.cshtml");
+
         }
 
 
@@ -148,7 +148,7 @@ namespace Blogger.Controllers
         {
             try
             {
-                Post updatedPost = DbContext.Posts.Single(p => p.PostId == minPost.Id);
+                var updatedPost = DbContext.Posts.Single(p => p.PostId == minPost.Id);
                 if (Context.User.Identity.Name == updatedPost.PosterEmail)
                 {
                     if (minPost.Title == null)
