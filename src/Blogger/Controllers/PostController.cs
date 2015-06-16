@@ -22,25 +22,39 @@ namespace Blogger.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult NewPost(MinPost postMin)
         {
+            //TODO add a check for a post that already has the slug.
+            /*
+            DbContext.Posts.Single(p => p.Slug == postMin.Slug);
+            */
+            //  var count = DbContext.Posts.Any(p => p.Slug == postMin.Slug);
             var newPost = new Post();
             newPost.PosterEmail = Context.User.Identity.Name;
             if (postMin.Title == null)
             {
-                newPost.Title =  DateTime.Now.ToString();
+                // TODO Replace the ToString call
+                newPost.Title = DateTimeOffset.Now.ToString();
             }
             else
             {
                 newPost.Title = postMin.Title;
-            }           
+            }
             newPost.Text = postMin.Text;
             newPost.PostId = postMin.Id;
             newPost.Slug = postMin.Slug;
             newPost.TimeStamp = DateTimeOffset.Now;
+
+            if (DbContext.Posts.Any(p => p.Slug == postMin.Slug))
+            {
+                return View(newPost);
+            }
+            
            
 
             AddPost(newPost);
-
-            var allPosts = new PostCollection(DbContext.Posts.ToArray());
+            //DbContext.Posts.Or
+            var test1 = DbContext.Posts.OrderBy(p => p.TimeStamp);
+            var test2 = DbContext.Posts.OrderByDescending(p => p.TimeStamp);
+            var allPosts = new PostCollection(DbContext.Posts.OrderBy(p => p.TimeStamp).ToArray());
             return View("~/Views/Home/Index", allPosts);
 
         
@@ -198,6 +212,8 @@ namespace Blogger.Controllers
         {
             return View();
         }
+
+
     }
 
 }

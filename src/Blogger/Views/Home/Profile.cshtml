@@ -7,8 +7,8 @@
 <div class="pull-left"><h2>@ViewBag.Title</h2> </div>
 <br />
     <div class="pull-right ">
-        @Html.ActionLink("Write new post","NewPost", "Post")
-        <form asp-controller="Post" asp-action="NewPost"><button type="submit" class="btn btn-group-lg btn-lg btn-primary" ><span class="glyphicon glyphicon-plus"></span> </button></form>
+        @Html.ActionLink("","NewPost", "Post",  new { test = 0 }, new { @class = "btn btn-primary btn-lg glyphicon glyphicon-plus pull-right" })
+       
   </div>
     <br /><br/><br/>
     <div>
@@ -19,7 +19,7 @@
 
                     <li>
                         <p> @post.Slug</p>
-                        @Html.ActionLink(post.Title, "SinglePost", "Post", new { slug = post.Slug }) 
+                        @Html.ActionLink(post.Title, "SinglePost", "Post", new { slug = post.Slug } ) 
                       
 
 
