@@ -52,12 +52,9 @@ namespace Blogger.Controllers
 
             AddPost(newPost);
             //DbContext.Posts.Or
-            var test1 = DbContext.Posts.OrderBy(p => p.TimeStamp);
-            var test2 = DbContext.Posts.OrderByDescending(p => p.TimeStamp);
-            var allPosts = new PostCollection(DbContext.Posts.OrderBy(p => p.TimeStamp).ToArray());
-            return View("~/Views/Home/Index", allPosts);
+            return RedirectToAction("Index", "Home");
 
-        
+
         }
 
         public IActionResult Index()
@@ -100,7 +97,7 @@ namespace Blogger.Controllers
 
        public IActionResult Error()
         {
-            return View("~/Views/Shared/Error.cshtml", "**waives hand This is not the post you're looking for");
+            return View("~/Views/Shared/Error.cshtml", " *Waives hand* This is not the post you are looking for");
         }
 
         [Authorize]
@@ -118,33 +115,25 @@ namespace Blogger.Controllers
         public IActionResult DeletePost(int id)
         {
             
-            try
-            {
-                Post post = (Post)DbContext.Posts.Single(p => p.PostId == id);
+           
+                var post = DbContext.Posts.SingleOrDefault(p => p.PostId == id);
+                
                 if (post != null)
                 {
-
                     if (Context.User.Identity.Name == post.PosterEmail)
                     {
                         DbContext.Posts.Remove(post);
                         DbContext.SaveChanges();
-                        var allMyPosts = new PostCollection(DbContext.Posts
-                            .Where(p => p.PosterEmail == Context.User.Identity.Name).ToArray());
 
-                        return View("~/Views/Home/Profile", allMyPosts);
+                        return RedirectToAction("Profile", "Home");
                     }
                     else
                     {
                         return View("~/Views/Shared/Error.cshtml", "You are not authorized to delete this post");
                     }
                 }
-            }
-            catch (Exception)
-            {
-                return View("~/Views/Shared/Error.cshtml");
-
-            }
-            return View("~/Views/Shared/Error.cshtml");
+            
+            return  RedirectToAction("Error", "Home");
         }
 
 
@@ -152,20 +141,14 @@ namespace Blogger.Controllers
         [HttpGet]
         public IActionResult GetEditPostView(int id)
         {
-            try
-            {
-                var post = DbContext.Posts.Single(p => p.PostId == id);
+            
+                var post = DbContext.Posts.SingleOrDefault(p => p.PostId == id);
                 if (post.PosterEmail == Context.User.Identity.Name) { 
                     return View("EditPost", post);
                 }
-            }
-            catch (Exception)
-            {
-
-                return View("~/Views/Shared/Error.cshtml");
-            }
-
-            return View("~/Views/Shared/Error.cshtml");
+            
+           
+                return RedirectToAction("Error", "Home");
 
         }
 
@@ -175,8 +158,7 @@ namespace Blogger.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult UpdatePost(MinPost minPost) 
         {
-            try
-            {
+           
                 var updatedPost = DbContext.Posts.Single(p => p.PostId == minPost.Id);
                 if (Context.User.Identity.Name == updatedPost.PosterEmail)
                 {
@@ -194,14 +176,8 @@ namespace Blogger.Controllers
                     DbContext.SaveChanges();
                     return View("~/Views/Post/SinglePost", updatedPost);
                 }
-            }
-            catch (Exception)
-            {
-
-                return View("~/Views/Shared/Error.cshtml");
-            }
-
-             return View("~/Views/Shared/Error.cshtml");
+            
+                return RedirectToAction("Error", "Home");
 
 
         }
