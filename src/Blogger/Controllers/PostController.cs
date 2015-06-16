@@ -18,8 +18,9 @@ namespace Blogger.Controllers
 
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(MinPost postMin)
+        public IActionResult NewPost(MinPost postMin)
         {
             var newPost = new Post();
             newPost.PosterEmail = Context.User.Identity.Name;
@@ -33,8 +34,9 @@ namespace Blogger.Controllers
             }           
             newPost.Text = postMin.Text;
             newPost.PostId = postMin.Id;
-            newPost.TimeStamp =   DateTime.Now;
-            newPost.PosterId = Context.User.Identity.GetHashCode();
+            newPost.Slug = postMin.Slug;
+            newPost.TimeStamp = DateTimeOffset.Now;
+           
 
             AddPost(newPost);
 
@@ -56,23 +58,36 @@ namespace Blogger.Controllers
 
 
         
-        public IActionResult SinglePost(int id)
+        //public IActionResult SinglePost(int id)
+        //{
+        //    try
+        //    {
+        //        var singlePost = DbContext.Posts.Single(p => p.PostId == id);
+        //        return View(singlePost);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return View("~/Views/Shared/Error.cshtml", "**waives hand This is not the post you're looking for");
+
+
+        //    }
+
+        //}
+
+        public IActionResult SinglePost(string slug)
         {
-            try
-            {
-                var singlePost = DbContext.Posts.Single(p => p.PostId == id);
+
+                var singlePost = DbContext.Posts.Single(p => p.Slug == slug);
                 return View(singlePost);
-            }
-            catch (Exception)
-            {
-                return View("~/Views/Shared/Error.cshtml", "**waives hand This is not the post you're looking for");
+            
 
-
-            }
 
         }
 
-
+       public IActionResult Error()
+        {
+            return View("~/Views/Shared/Error.cshtml", "**waives hand This is not the post you're looking for");
+        }
 
         [Authorize]
         public void AddPost(Post Post)
@@ -177,7 +192,7 @@ namespace Blogger.Controllers
 
         }
 
-
+        [HttpGet]
         [Authorize]
         public IActionResult NewPost()
         {

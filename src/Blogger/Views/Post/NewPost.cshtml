@@ -8,18 +8,25 @@
 
 <h3>@User.Identity.Name</h3>
 
-<form asp-controller="Post" asp-action="Index">
+<form asp-controller="Post" asp-action="NewPost" method ="Post">
     
         <div>
             <p>Write a new post!</p>
             <div class="form-group">
-                <input type="text" name="Title" class="form-control" placeholder="Title" id="usr">
+                <input type="text" name="Title" class="form-control" placeholder="Title" id="usr"> 
             </div>
-            <textarea class =" form-control"name="Text" id="Post" rows="25" cols="100"></textarea>
+            <div>
+              <p> http://blogger-mikaelm.azurewebsites.net/ </p> <input type="text" name="Slug" class="form-control" placeholder="Slug" id="usr">
+</div>
+            <br>
+            <div>
+                <textarea class=" form-control" name="Text"  rows="25" cols="100"></textarea>
+            </div>
         </div>
         
             <div>
                <button type="submit"  class="btn btn-success btn-lg post-button pull-right">Post</button><br /><br />
             </div>
+
 
 </form>

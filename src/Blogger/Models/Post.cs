@@ -14,10 +14,12 @@ namespace Blogger.Models
 
         public String Text { get; set; }
 
-        public DateTime TimeStamp { get; set; }
+        public DateTimeOffset TimeStamp { get; set; }
 
         public String PosterEmail { get; set; }
         public int PosterId { get; set; }
+
+       public string Slug { get; set; }
 
     }
 }

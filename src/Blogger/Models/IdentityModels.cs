@@ -24,8 +24,8 @@ namespace Blogger.Models
             // Create the database and schema if it doesn't exist
             if (!_created)
             {
-                //Database.EnsureDeleted();
-                //Database.AsRelational().ApplyMigrations();
+               // Database.EnsureDeleted();
+              //  Database.AsRelational().ApplyMigrations();
                 Database.EnsureCreated();
                 _created = true;
             }

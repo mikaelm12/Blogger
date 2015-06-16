@@ -8,9 +8,19 @@ using Blogger.Models;
 namespace Blogger.Migrations
 {
     [ContextType(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class slugProperty
     {
-        public override IModel Model
+        public override string Id
+        {
+            get { return "20150615204857_slugProperty"; }
+        }
+        
+        public override string ProductVersion
+        {
+            get { return "7.0.0-beta4-12943"; }
+        }
+        
+        public override IModel Target
         {
             get
             {
@@ -69,7 +79,7 @@ namespace Blogger.Migrations
                             .Annotation("OriginalValueIndex", 3);
                         b.Property<string>("Text")
                             .Annotation("OriginalValueIndex", 4);
-                        b.Property<DateTimeOffset>("TimeStamp")
+                        b.Property<DateTime>("TimeStamp")
                             .Annotation("OriginalValueIndex", 5);
                         b.Property<string>("Title")
                             .Annotation("OriginalValueIndex", 6);
