@@ -2,6 +2,7 @@
 [Bb]in/
 TestResults/
 .nuget/
+.vs/
 _ReSharper.*/
 packages/
 artifacts/
@@ -13,7 +14,6 @@ PublishProfiles/
 _ReSharper.*
 nuget.exe
 *net45.csproj
-*net451.csproj
 *k10.csproj
 *.psess
 *.vsp

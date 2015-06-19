@@ -11,7 +11,7 @@
 @if (Model != null)
 {
 
-
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
     <form asp-controller="Post" asp-action="NewPost" method="Post">
 
         <div class="form-group">
@@ -24,7 +24,7 @@
         <div class="alert alert-danger" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
-            Sorry, that url has already been taken!
+            Sorry, that url wont work!<p> The name has already been taken or it wasn't in the correct format. Be sure to only use letters and dashes in your slug
         </div>
        
         <div>
@@ -46,7 +46,7 @@
             <input type="text" name="Title" class="form-control" placeholder="Title" id="usr">
         </div>
         <div>
-            <p> http://blogger-mikaelm.azurewebsites.net/ </p> <input type="text" name="Slug" class="form-control" placeholder="Slug" id="usr" lettersonly="true" required>
+             http://blogger-mikaelm.azurewebsites.net/  <input type="text" data-val="true" name="Slug" class="form-control" placeholder="Slug" id="usr" lettersonly="true" required>
         </div>
         <br>
         <div>
@@ -58,6 +58,11 @@
                <button type="submit"  class="btn btn-success btn-lg post-button pull-right">Post</button><br /><br />
             </div>
         </form>
+        <script src="~/lib/jquery-validation/additional-methods.js"></script>
+
+
+
+
 }
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

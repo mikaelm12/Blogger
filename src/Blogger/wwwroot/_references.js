@@ -186,6 +186,7 @@
 /// <reference path="../bower_components/jquery-validation/test/test.js" />
 /// <reference path="../bower_components/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
 /// <reference path="../gulpfile.js" />
+/// <reference path="js/JavaScript.js" />
 /// <reference path="lib/bootstrap/js/bootstrap.js" />
 /// <reference path="lib/bootstrap-touch-carousel/js/bootstrap-touch-carousel.js" />
 /// <reference path="lib/hammer.js/hammer.js" />
